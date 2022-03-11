@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>ConfigPara</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <context-param>
+    <param-name>dbdriver</param-name>
+    <param-value>com.mysql.jdbc.Driver</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>conf</servlet-name>
+    <servlet-class>com.simplilearn.conf.Config</servlet-class>
+    <init-param>
+      <param-name>username</param-name>
+      <param-value>root</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>conf</servlet-name>
+    <url-pattern>/config</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>another</servlet-name>
+    <servlet-class>com.simplilearn.conf.AnotherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>another</servlet-name>
+    <url-pattern>/another</url-pattern>
+  </servlet-mapping>
+</web-app>
