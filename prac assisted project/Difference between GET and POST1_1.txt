@@ -1,0 +1,158 @@
+
+index.html file
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>GET vs Post Demo</title>
+</head>
+<body>
+<a href="gethandler?name=Jack&address=66+London Street">Do a Servlet 
+GET</a><br><br>
+<form name=frm method=post action="posthandler">
+  Name <input name="name" id="name" maxlenght=50><br>
+  Address <input name="address" id="address" maxlength=100><br>
+  <button>Submit</button>
+  </form>
+</body>
+</html>
+
+
+
+
+
+GetHandler.java
+import java.io.*;
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class GetHandler
+ */
+public class GetHandler extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public GetHandler() {
+    	super();
+        // TODO Auto-generated constructor stub
+    	
+    }
+    
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        out.println("Name=" + name + "<br>Address=" + address);
+        out.println("</body></html>");
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+
+
+
+PostHandler.java 
+import java.io.*;
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class PostHandler
+ */
+public class PostHandler extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public PostHandler() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        
+        out.println("Name=" + name + "<br>Address=" + address);
+        out.println("</body></html>");
+}
+
+		
+	}
+
+
+
+
+
+Web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>LoginLogout</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>GetHandler</servlet-name>
+    <servlet-class>GetHandler</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PostHandler</servlet-name>
+    <servlet-class>PostHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHandler</servlet-name>
+    <url-pattern>/gethandler</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PostHandler</servlet-name>
+    <url-pattern>/posthandler</url-pattern>
+  </servlet-mapping>
+</web-app>

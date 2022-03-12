@@ -1,0 +1,35 @@
+//Configuring a Servlet with Eclipse
+
+Creating a dynamic web project:
+                               1 Open Eclipse
+                               2 Go to the File menu. Choose New->Dynamic Web Project
+                               3 Enter the project name as FirstServlet. Click on Next
+                               4 Enter nothing in the next screen and click on Next
+                               5 Check the checkbox Generate web.xml deployment descriptor and click on Finish
+
+Creating a servlet:
+
+                  1 In the Project Explorer, expand ServletConcept->Java Resources
+                  2 Right click on src and choose New->Servlet
+                  3 In Class Name, enter FirstServlet and click on Finish
+
+
+Checking for servlet-api.jar
+
+1 Before building the project, we need to add servlet-api.jar to the project
+2 Servlet-api.jar file is already present in your practice lab. (Refer FSD: Lab Guide - Phase 2)
+3 To add it to the project, follow the below mentioned steps:
+4 In the Project Explorer, right click on FirstServlet and choose Properties
+5 Select Java Build Path from the options on the left
+6 Click on Libraries tab on the right
+7 Under ClassPath, expand the node that says Apache Tomcat
+8 If there is an existing entry for servlet-api.jar, then click on Cancel and exit the window
+9 If it is not there, then click on Classpath entry and click on Add External JARs button on the right
+10 From the file list, select servlet-api.jar file and click Ok
+11  Click on Apply and Close
+
+
+
+Building the project
+1 From the Project menu at the top, click on Build
+2 If any compile errors are shown, fix them as required

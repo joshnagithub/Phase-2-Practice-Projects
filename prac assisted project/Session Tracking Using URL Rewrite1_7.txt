@@ -1,0 +1,107 @@
+//Creating an HTML page
+
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>URL Rewriting Demo</title>
+</head>
+<body>
+        <a href="login?userid=admin">Dashboard with URL Rewriting based login</a><br>
+        <a href="dashboard">Dashboard without URL Rewriting based login</a>
+</body>
+</html>
+
+
+//Creating a LoginServlet servlet
+
+import java.io.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+import javax.servlet.*;
+
+public class LoginServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+    public LoginServlet() {
+        super();
+}
+
+ protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+String userId = request.getParameter("userid");
+             response.sendRedirect("dashboard?userid=" + userId);  
+                
+        }
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+//Creating a Dashboard servlet
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+public class Dashboard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+    public Dashboard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            
+            String userId = request.getParameter("userid");
+            if (userId == null ) {
+                out.println("No UserId was found in the URL.<br>");
+            } else {
+                out.println("UserId obtained from URL Rewriting:" + userId + "<br>");
+            }
+            out.println("</body></html>");
+
+        }
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+//Configuring web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>URLRewriteDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+</web-app>
